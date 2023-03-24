@@ -68,11 +68,11 @@ function Home() {
       </InfoContainer>
 
       <ActionBarContainer>
-        <Select data={posicaoMock} position={filterByPosition} setPosition={setFilterByPosition} />
-        <Select data={idadeMock} age={filterByAge} setAge={setFilterByAge} />
+        <Select data={posicaoMock} selected={filterByPosition} onChange={setFilterByPosition} />
+        <Select data={idadeMock} selected={filterByAge} onChange={setFilterByAge} />
         <CheckboxContainer>
-          <Checkbox label="Somente quem marcou gol" scored={setFilterByWhoScored} />
-          <Checkbox label="Somente quem jogou na final" playedFinal={setFilterByPlayedFinal} />
+          <Checkbox label="Somente quem marcou gol" onChange={setFilterByWhoScored} />
+          <Checkbox label="Somente quem jogou na final" onChange={setFilterByPlayedFinal} />
         </CheckboxContainer>
       </ActionBarContainer>
 

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import SimpleCard from './SimpleCard';
@@ -46,5 +47,28 @@ function Card({ selectedPlayer, cards }) {
     ? expandedCard() : isCardOpen && isMobile
       ? mobileCard() : simpleCard();
 }
+
+Card.propTypes = {
+  selectedPlayer: PropTypes.shape({
+    nome: PropTypes.string.isRequired,
+    foto: PropTypes.string.isRequired,
+    posicao: PropTypes.string.isRequired,
+    idade: PropTypes.number.isRequired,
+    jogos: PropTypes.number.isRequired,
+    gols: PropTypes.number.isRequired,
+    texto: PropTypes.string.isRequired,
+    final: PropTypes.string.isRequired,
+  }).isRequired,
+  cards: PropTypes.arrayOf(PropTypes.shape({
+    nome: PropTypes.string.isRequired,
+    foto: PropTypes.string.isRequired,
+    posicao: PropTypes.string.isRequired,
+    idade: PropTypes.number.isRequired,
+    jogos: PropTypes.number.isRequired,
+    gols: PropTypes.number.isRequired,
+    texto: PropTypes.string.isRequired,
+    final: PropTypes.string.isRequired,
+  })).isRequired,
+};
 
 export default Card;

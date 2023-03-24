@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Chart } from 'react-google-charts';
 import getChartProps from '../../../utils/getChartProps';
@@ -36,7 +36,7 @@ function MobileCard({ selectedPlayer, cards, handleIsCardOpenChange }) {
   const index = cards.findIndex((item) => item.nome === renderedPlayer.nome);
 
   const header = () => (
-    <HeaderContainer style={{ display: 'flex', flexDirection: 'row' }}>
+    <HeaderContainer>
       <ImageContainer imgUrl={`/jogadores/${foto}`} />
 
       <AsideContainer>
@@ -98,5 +98,29 @@ function MobileCard({ selectedPlayer, cards, handleIsCardOpenChange }) {
     </Overlay>
   );
 }
+
+MobileCard.propTypes = {
+  selectedPlayer: PropTypes.shape({
+    nome: PropTypes.string.isRequired,
+    foto: PropTypes.string.isRequired,
+    posicao: PropTypes.string.isRequired,
+    idade: PropTypes.number.isRequired,
+    jogos: PropTypes.number.isRequired,
+    gols: PropTypes.number.isRequired,
+    texto: PropTypes.string.isRequired,
+    final: PropTypes.string.isRequired,
+  }).isRequired,
+  cards: PropTypes.arrayOf(PropTypes.shape({
+    nome: PropTypes.string.isRequired,
+    foto: PropTypes.string.isRequired,
+    posicao: PropTypes.string.isRequired,
+    idade: PropTypes.number.isRequired,
+    jogos: PropTypes.number.isRequired,
+    gols: PropTypes.number.isRequired,
+    texto: PropTypes.string.isRequired,
+    final: PropTypes.string.isRequired,
+  })).isRequired,
+  handleIsCardOpenChange: PropTypes.func.isRequired,
+};
 
 export default MobileCard;

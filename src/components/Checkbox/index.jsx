@@ -1,20 +1,13 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { CheckboxWrapper, CheckboxInput, CheckboxLabel } from './styles';
 
-function Checkbox({ label, playedFinal, scored }) {
+function Checkbox({ label, onChange }) {
   const [checked, setChecked] = useState(false);
 
   const handleCheckboxChange = () => {
     setChecked(!checked);
-
-    if (playedFinal) {
-      playedFinal(!checked);
-    }
-
-    if (scored) {
-      scored(!checked);
-    }
+    onChange(!checked);
   };
 
   return (
@@ -28,5 +21,10 @@ function Checkbox({ label, playedFinal, scored }) {
     </CheckboxWrapper>
   );
 }
+
+Checkbox.propTypes = {
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Checkbox;

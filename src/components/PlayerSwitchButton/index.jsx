@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import { ReactComponent as RightArrow } from '../../assets/icones/seta-direita.svg';
 import { ReactComponent as LeftArrow } from '../../assets/icones/seta-esquerda.svg';
 import {
@@ -28,5 +28,25 @@ function PlayerSwitchButton({
     </StylledButton>
   );
 }
+
+PlayerSwitchButton.propTypes = {
+  side: PropTypes.string.isRequired,
+  setRenderedPlayer: PropTypes.func.isRequired,
+  player: PropTypes.shape({
+    nome: PropTypes.string.isRequired,
+    foto: PropTypes.string.isRequired,
+    posicao: PropTypes.string.isRequired,
+    idade: PropTypes.number.isRequired,
+    jogos: PropTypes.number.isRequired,
+    gols: PropTypes.number.isRequired,
+    texto: PropTypes.string.isRequired,
+    final: PropTypes.string.isRequired,
+  }),
+  isDisabled: PropTypes.bool.isRequired,
+};
+
+PlayerSwitchButton.defaultProps = {
+  player: undefined,
+};
 
 export default PlayerSwitchButton;

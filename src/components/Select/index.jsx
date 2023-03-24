@@ -1,31 +1,50 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
-import { SelectContainer, StyledSelect, SelectIcon } from './styles';
+/* eslint-disable react/forbid-prop-types */
+import PropTypes from 'prop-types';
+import { useState } from 'react';
 import arrowDownIcon from '../../assets/icones/seta-baixo.svg';
+import {
+  SelectContainer, StyledSelect, SelectIcon, OptionsContainer, Option,
+} from './styles';
 
-function Select({
-  data, age, setAge, position, setPosition,
-}) {
-  const handleSelectChange = (event) => {
-    if (setAge) {
-      setAge(event.target.value);
-    } else {
-      setPosition(event.target.value);
-    }
+function Select({ data, selected, onChange }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSelectClick = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleOptionClick = (value) => {
+    onChange(value);
+    setIsOpen(false);
   };
 
   return (
     <SelectContainer>
-      <StyledSelect value={setAge ? age : position} onChange={handleSelectChange}>
+      <StyledSelect onClick={handleSelectClick}>
         {data.map(({ value, label }) => (
-          <option key={value} value={value}>
-            {label}
-          </option>
+          value === selected && <span key={value}>{label}</span>
         ))}
+        <SelectIcon src={arrowDownIcon} alt="Select icon" width="20px" />
       </StyledSelect>
-      <SelectIcon src={arrowDownIcon} alt="Select icon" width="20px" />
+      {isOpen && (
+        <OptionsContainer>
+          {data.map(({ value, label }) => (
+            value !== selected && (
+              <Option key={value} onClick={() => handleOptionClick(value)}>
+                {label}
+              </Option>
+            )
+          ))}
+        </OptionsContainer>
+      )}
     </SelectContainer>
   );
 }
+
+Select.propTypes = {
+  data: PropTypes.array.isRequired,
+  selected: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Select;

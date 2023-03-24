@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import { Chart } from 'react-google-charts';
 import getChartProps from '../../../utils/getChartProps';
 import {
@@ -53,5 +53,19 @@ function SimpleCard({ selectedPlayer, handleIsCardOpenChange }) {
     </SimpleCardContainer>
   );
 }
+
+SimpleCard.propTypes = {
+  selectedPlayer: PropTypes.shape({
+    nome: PropTypes.string.isRequired,
+    foto: PropTypes.string.isRequired,
+    posicao: PropTypes.string.isRequired,
+    idade: PropTypes.number.isRequired,
+    jogos: PropTypes.number.isRequired,
+    gols: PropTypes.number.isRequired,
+    texto: PropTypes.string.isRequired,
+    final: PropTypes.string.isRequired,
+  }).isRequired,
+  handleIsCardOpenChange: PropTypes.func.isRequired,
+};
 
 export default SimpleCard;
