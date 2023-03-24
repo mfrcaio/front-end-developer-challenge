@@ -5,8 +5,13 @@ export const Container = styled.div`
   height: 100%;
   width: 100%;
   max-width: 1500px;
+  min-height: 1400px;
   margin: 0 auto;
   background-color: ${({ theme }) => theme.background};
+
+  @media(max-width: 480px) {
+    min-height: 1000px;
+  }
 `;
 
 export const InfoContainer = styled.div`

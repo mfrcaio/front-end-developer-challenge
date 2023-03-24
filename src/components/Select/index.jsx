@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import arrowDownIcon from '../../assets/icones/seta-baixo.svg';
@@ -42,7 +41,20 @@ function Select({ data, selected, onChange }) {
 }
 
 Select.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+      }),
+    ),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        label: PropTypes.string.isRequired,
+      }),
+    ),
+  ]).isRequired,
   selected: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
